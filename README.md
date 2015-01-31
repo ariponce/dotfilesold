@@ -1,5 +1,6 @@
 # General installation
-* Run make.sh
+* Clone to home directory
+* Run 'make.sh'
 * The script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 
 # Vim config
@@ -8,3 +9,5 @@
 * `cd ~/.vim/bundle && ./get`
 * `ln ~/.vim/vimrc ~/.vimrc`
 * Start Vim
+
+Occassionally, the bundles may need updating.  To do this, `cd ~/.vim && ./update`

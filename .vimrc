@@ -18,9 +18,9 @@ filetype plugin on
 filetype indent on
 
 " Tabstops are 4 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set autoindent
 set number
@@ -329,6 +329,8 @@ imap <c-l><c-r> <c-k>r*
 imap <c-l><c-p> <c-k>p*
 " Phi
 imap <c-l><c-f> <c-k>f*
+
+:inoremap ( ()<Esc>i
 
 function! ClearText(type, ...)
 	let sel_save = &selection
@@ -778,7 +780,7 @@ iab teh        the
 "-----------------------------------------------------------------------------
 if has("gui_running")
   exe "set guifont=" . g:main_font
-  colorscheme xoria256
+  colorscheme   goldfish
   if !exists("g:vimrcloaded")
     winpos 0 0
     if !&diff
@@ -789,4 +791,7 @@ if has("gui_running")
     let g:vimrcloaded = 1
   endif
 endif
+syntax enable
+set background=dark
+colorscheme solarized
 :nohls

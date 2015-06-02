@@ -1,0 +1,86 @@
+[global_config]
+  enabled_plugins = ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  title_transmit_bg_color = "#004658"
+  title_inactive_fg_color = "#ededed"
+  title_inactive_bg_color = "#001d25"
+[keybindings]
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    background_image = None
+    use_system_font = False
+    audible_bell = True
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    foreground_color = "#839496"
+    font = DejaVu Sans Mono 11
+    background_color = "#002b36"
+  [[alternate]]
+    scrollbar_position = hidden
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    font = DejaVu Sans Mono 11
+    background_image = None
+    scrollback_lines = 4096
+    use_system_font = False
+    foreground_color = "#ffffff"
+    scroll_on_output = False
+    icon_bell = False
+    copy_on_selection = True
+    background_color = "#2d2d2d"
+  [[Base16 Ocean Dark]]
+    scrollbar_position = hidden
+    palette = "#2b303b:#bf616a:#a3be8c:#ebcb8b:#8fa1b3:#b48ead:#96b5b4:#c0c5ce:#65737e:#bf616a:#a3be8c:#ebcb8b:#8fa1b3:#b48ead:#96b5b4:#eff1f5"
+    font = DejaVu Sans Mono 11
+    background_image = None
+    use_system_font = False
+    cursor_color = "#c0c5ce"
+    foreground_color = "#c0c5ce"
+    scroll_on_output = False
+    copy_on_selection = True
+    background_color = "#2b303b"
+    allow_bold = False
+    scrollback_infinite = True
+  [[New Profile]]
+    background_image = None
+    background_type = transparent
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+  [[Tri]]
+    [[[child0]]]
+      position = 1920:0
+      type = Window
+      order = 0
+      parent = ""
+      size = 1920, 1057
+    [[[child1]]]
+      position = 960
+      type = HPaned
+      order = 0
+      parent = child0
+    [[[child2]]]
+      position = 528
+      type = VPaned
+      order = 0
+      parent = child1
+    [[[terminal3]]]
+      profile = Base16 Ocean Dark
+      type = Terminal
+      order = 0
+      parent = child2
+    [[[terminal5]]]
+      profile = Base16 Ocean Dark
+      type = Terminal
+      order = 1
+      parent = child1
+    [[[terminal4]]]
+      profile = Base16 Ocean Dark
+      type = Terminal
+      order = 1
+      parent = child2
+[plugins]

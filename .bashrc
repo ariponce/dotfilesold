@@ -6,8 +6,10 @@
 [[ $- != *i* ]] && return
 
 # Prompt
-PS1='[\u@\h \W]\$ '
+PS1='\[\e[1;37m\][\u@\h\[\e[1;36m\] \w]\$ \[\033[0m\]'
 
+# Dircolors
+eval `dircolors ~/colors/dircolors-solarized-master/dircolors.ansi-dark`
 
 # don't put duplicate lines in the history. See bash(1) for more options
 HISTCONTROL=ignoredups

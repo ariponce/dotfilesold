@@ -1,0 +1,13 @@
+mpd_music_dir = "/home/ariel/Music/"
+
+colors_enabled = "yes"
+color1 = "red"
+color2 = "black"
+empty_tag_color = "red"
+main_window_color = "cyan"
+main_window_highlight_color = "blue"
+active_column_color = "green"
+active_window_border = "black"
+window_border_color = "red"
+statusbar_color = "yellow"
+header_window_color = "magenta"

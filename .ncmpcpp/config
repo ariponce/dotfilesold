@@ -9,7 +9,7 @@ main_window_highlight_color = "cyan"
 active_column_color = "blue"
 active_window_border = "black"
 window_border_color = "red"
-statusbar_color = "yellow"
+#statusbar_color = "yellow"
 header_window_color = "yellow"
 
 ##### song format #####
@@ -54,4 +54,9 @@ header_window_color = "yellow"
 ## Note: colors can be nested.
 ##
 #
-song_list_format = "{%n - }{%a - }{%t}|{$8%f$9}{$3(%l)$9}"
+#song_list_format = "{%n - }{%a - }{%t}|{$8%f$9}{$3(%l)$9}"
+
+progressbar_color = "black"
+progressbar_elapsed_color = "yellow"
+song_list_format = " $1%a $5//$8 %t"
+song_columns_list_format = "(5)[blue]{n} (22)[blue]{a} (39)[blue]{t|f} (30)[blue]{b} (4)[blue]{l}"

@@ -32,6 +32,7 @@ Bundle "jiangmiao/auto-pairs"
 Bundle "airblade/vim-gitgutter"
 Bundle "scrooloose/nerdtree"
 Bundle "vits/ZoomWin"
+Bundle 'arnaud-lb/vim-php-namespace'
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
@@ -91,6 +92,12 @@ nnoremap <silent> <C-w>w :ZoomWin<CR>
 imap jj <esc>
 cmap jj <esc>
 
+""" Saving and exiting
+nnoremap <leader>s :w<CR>
+nnoremap <leader>S :wq<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :q!<CR>
+
 " airline
 if !exists("g:airline_symbols")
   let g:airline_symbols = {}
@@ -107,6 +114,10 @@ let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
 
 " fix bufexplorer bug with hidden
 let g:bufExplorerFindActive=0
+
+" php-namespace
+inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
+noremap <Leader>u :call PhpInsertUse()<CR>
 
 "-----------------------------------------------------------------------------
 " NERD Tree Plugin Settings
@@ -126,5 +137,10 @@ let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
                    \ '\.embed\.manifest$', '\.embed\.manifest.res$',
                    \ '\.intermediate\.manifest$', '^mt.dep$' ]
 
-set tags=~/.vim/tags/mce
+set tags=~/.vim/tags/mce,~/.vim/tags/lumen
+
 let g:SuperTabDefaultCompletionType = ""
+
+""" auto-open NerdTree when no file is specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif

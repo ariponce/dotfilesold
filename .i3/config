@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:DejaVu Sans Mono Book 8
+font pango:DejaVu Sans Mono Book, FontAwesome 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -39,7 +39,7 @@ bindsym $mod+i exec firefox
 bindsym $mod+p exec phpstorm.sh 
 
 # kill focused window
-bindsym $mod+Shift+A kill
+bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -102,9 +102,9 @@ bindsym $mod+q focus parent
 bindsym $mod+ampersand workspace 1 term
 bindsym $mod+eacute workspace 2 www
 bindsym $mod+quotedbl workspace 3 code
-bindsym $mod+apostrophe workspace 4
-bindsym $mod+parenleft workspace 5
-bindsym $mod+minus workspace 6
+bindsym $mod+apostrophe workspace 4 prod
+bindsym $mod+parenleft workspace 5 REST
+bindsym $mod+minus workspace 6 DB
 bindsym $mod+egrave workspace 7
 bindsym $mod+underscore workspace 8
 bindsym $mod+ccedilla workspace 9
@@ -162,22 +162,23 @@ mode "system: [p]oweroff [r]eboot" {
 }
 
 bindsym $mod+r mode "resize"
-bindsym $mod+Shift+x mode "system [p]oweroff [r]eboot"
+bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
 
 # Disable borders
 for_window [class="^.*"] border pixel 0
 
 # Gaps
-#gaps inner 10
-#gaps outer 0 
+gaps inner 8
+gaps outer 5 
 
 # Dual-monitor setup
-exec --no-startup-id xrandr --output DisplayPort-0 --auto --left of DVI-0
+exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
 exec --no-startup-id xsetroot -solid "#25272A"
 
 # Startup programs
 exec --no-startup-id "nm-applet"
 exec --no-startup-id compton -cb
+exec --no-startup-id start-pulseaudio-x11
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

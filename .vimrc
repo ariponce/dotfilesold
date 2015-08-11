@@ -33,9 +33,12 @@ Bundle "airblade/vim-gitgutter"
 Bundle "scrooloose/nerdtree"
 Bundle "vits/ZoomWin"
 Bundle 'arnaud-lb/vim-php-namespace'
+Bundle "unblevable/quick-scope"
+Bundle "Valloric/YouCompleteMe"
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
+Bundle "shawncplus/phpcomplete.vim"
 Bundle "fatih/vim-go"
 
 " All Plugins must be added before the following line
@@ -144,3 +147,38 @@ let g:SuperTabDefaultCompletionType = ""
 """ auto-open NerdTree when no file is specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+""" Only enable the quick-scope plugin highlighting when using the f/F/t/T movements
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+
+    let letter = nr2char(getchar())
+
+    if needs_disabling
+        QuickScopeToggle
+    endif
+
+    return a:movement . letter
+endfunction
+
+let g:qs_enable = 0
+
+nnoremap <expr> <silent> f Quick_scope_selective('f')
+nnoremap <expr> <silent> F Quick_scope_selective('F')
+nnoremap <expr> <silent> t Quick_scope_selective('t')
+nnoremap <expr> <silent> T Quick_scope_selective('T')
+vnoremap <expr> <silent> f Quick_scope_selective('f')
+vnoremap <expr> <silent> F Quick_scope_selective('F')
+vnoremap <expr> <silent> t Quick_scope_selective('t')
+vnoremap <expr> <silent> T Quick_scope_selective('T')
+
+let g:qs_first_occurrence_highlight_color = 155
+let g:qs_second_occurrence_highlight_color = 81
+
+""" YouCompleteMe
+let g:ycm_collect_identifiers_from_tags_files = 1

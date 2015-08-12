@@ -3,4 +3,7 @@
 /.mpd/mpdstate
 /.mpd/mpd.db
 /.vim
+/vim
+/.i3/log
+.gitconfig
 *.swp

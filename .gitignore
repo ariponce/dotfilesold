@@ -2,3 +2,5 @@
 /.mpd/mpd.pid
 /.mpd/mpdstate
 /.mpd/mpd.db
+/.vim
+*.swp

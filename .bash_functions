@@ -107,3 +107,16 @@ function fs() {
     du $arg .[^.]* *;
   fi;
 }
+
+function mkcd() {
+    dir="$*";
+    mkdir -p "$dir" && cd "$dir";
+}
+
+function logview() {
+    sudo tail -n200 $1
+}
+
+function topcommands() {
+    history | awk '{print $2}' | awk 'BEGIN {FS="|"}{print $1}' | sort | uniq -c | sort -nr | head
+}

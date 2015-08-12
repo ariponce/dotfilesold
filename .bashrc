@@ -15,8 +15,8 @@ eval `dircolors ~/colors/dircolors-solarized-master/dircolors.ansi-dark`
 HISTCONTROL=ignoredups
 
 # Expand the history size
-HISTFILESIZE=10000 
-HISTSIZE=100
+HISTFILESIZE=50000 
+HISTSIZE=500
 
 # commands with leading space do not get added to history
 HISTCONTROL=ignorespace
@@ -30,6 +30,7 @@ export PATH="$PATH:~/.composer/vendor/bin"
 export PATH="$PATH:~/.gem/ruby/2.1.0/bin"
 export PATH="$PATH:/vendor/bin"
 export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:~/scripts"
 
 # aliases
 #=========================================
@@ -41,4 +42,13 @@ fi
 #=========================================
 if [ -f ~/.bash_functions ]; then
 . ~/.bash_functions
+fi
+
+source ~/.phpbrew/bashrc
+
+export GIT_PROMPT_FETCH_REMOTE_STATUS=0
+export QT_GRAPHICSSYSTEM=native
+
+if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
+  . ~/.bash-git-prompt/gitprompt.sh
 fi

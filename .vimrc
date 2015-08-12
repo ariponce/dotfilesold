@@ -35,6 +35,7 @@ Bundle "vits/ZoomWin"
 Bundle 'arnaud-lb/vim-php-namespace'
 Bundle "unblevable/quick-scope"
 Bundle "Valloric/YouCompleteMe"
+Bundle "powerline/powerline"
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
@@ -54,6 +55,7 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set autoindent
+set smartindent
 set number
 set noignorecase
 set vb

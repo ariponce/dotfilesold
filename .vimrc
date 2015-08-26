@@ -1,4 +1,4 @@
-""" PACKAGES
+"  "" PACKAGES
 
 " no vi compatibility
 set nocompatible
@@ -34,8 +34,16 @@ Bundle "scrooloose/nerdtree"
 Bundle "vits/ZoomWin"
 Bundle 'arnaud-lb/vim-php-namespace'
 Bundle "unblevable/quick-scope"
-Bundle "Valloric/YouCompleteMe"
+"Bundle "Valloric/YouCompleteMe"
 Bundle "powerline/powerline"
+Bundle "easymotion/vim-easymotion"
+Bundle "scrooloose/nerdcommenter"
+Bundle "majutsushi/tagbar"
+Bundle "SirVer/ultisnips"
+Bundle "honza/vim-snippets"
+Bundle "junegunn/vim-easy-align"
+Bundle "tpope/vim-repeat"
+Bundle "Shougo/neocomplete.vim"
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
@@ -45,6 +53,8 @@ Bundle "fatih/vim-go"
 " All Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+filetype plugin on
 
 
 """ SETTINGS AND KEYBINDS 
@@ -69,9 +79,15 @@ set hlsearch
 " Incrementally match the search
 set incsearch
 
+" Save swp to custom folders
+set backupdir=~/.vim/backup_files//
+set directory=~/.vim/swap_files//
+set undodir=~/.vim/undo_files//
+
 " syntax highlighting
 syntax on
 set background=dark
+let g:hybrid_use_Xresources=1
 colorscheme hybrid
 
 " Make sure that unsaved buffers that are to be put in the background are 
@@ -85,6 +101,9 @@ let g:ctrlp_map = "<c-p>"
 nnoremap <leader>t :CtrlPMRU<CR>
 nnoremap <leader>bp :CtrlPBuffer<CR>
 nnoremap <leader>g :CtrlPTag<cr>
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_max_files=0 
+let g:ctrlp_working_path_mode = ''
 
 """ Move between splits
 nnoremap <C-J> <C-W><C-J>
@@ -97,11 +116,18 @@ nnoremap <silent> <C-w>w :ZoomWin<CR>
 imap jj <esc>
 cmap jj <esc>
 
+map <leader>n :bn<CR>
+map <leader>p :bp<CR>
+map <leader>d :bd<CR>
+
 """ Saving and exiting
 nnoremap <leader>s :w<CR>
 nnoremap <leader>S :wq<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
+
+""" Remove highlights
+nnoremap <leader>c :nohl<CR>
 
 " airline
 if !exists("g:airline_symbols")
@@ -116,6 +142,8 @@ let g:airline#extensions#tabline#enabled       =  1
 let g:airline#extensions#tabline#tab_nr_type   =  1 " tab number
 let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
 let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
+
+set laststatus=2
 
 " fix bufexplorer bug with hidden
 let g:bufExplorerFindActive=0
@@ -142,7 +170,7 @@ let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
                    \ '\.embed\.manifest$', '\.embed\.manifest.res$',
                    \ '\.intermediate\.manifest$', '^mt.dep$' ]
 
-set tags=~/.vim/tags/mce,~/.vim/tags/lumen
+set tags=~/.vim/tags/mce,~/.vim/tags/lumen,tags
 
 let g:SuperTabDefaultCompletionType = ""
 
@@ -183,4 +211,20 @@ let g:qs_first_occurrence_highlight_color = 155
 let g:qs_second_occurrence_highlight_color = 81
 
 """ YouCompleteMe
-let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
+
+""" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+let g:neocomplete#enable_at_startup = 1
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)"

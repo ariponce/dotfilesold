@@ -44,11 +44,13 @@ Bundle "honza/vim-snippets"
 Bundle "junegunn/vim-easy-align"
 Bundle "tpope/vim-repeat"
 Bundle "Shougo/neocomplete.vim"
+Bundle "terryma/vim-expand-region"
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
 Bundle "shawncplus/phpcomplete.vim"
 Bundle "fatih/vim-go"
+Bundle "mattn/emmet-vim"
 
 " All Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,6 +61,7 @@ filetype plugin on
 
 """ SETTINGS AND KEYBINDS 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = "\<Space>"
 " Tabstops are 4 spaces
 set tabstop=4
 set shiftwidth=4
@@ -70,11 +73,17 @@ set number
 set noignorecase
 set vb
 set nowrap
+set ruler
 " Show the current mode
 set showmode
 set autoread
 " Enable search highlighting
 set hlsearch
+
+set pastetoggle=<F2>
+
+" Allow saving files as sudo
+cmap w!! %!sudo tee > /dev/null %
 
 " Incrementally match the search
 set incsearch
@@ -94,7 +103,6 @@ colorscheme hybrid
 " allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
 " set <leader>
-let mapleader=","
 
 " ctrlP config
 let g:ctrlp_map = "<c-p>"
@@ -120,14 +128,38 @@ map <leader>n :bn<CR>
 map <leader>p :bp<CR>
 map <leader>d :bd<CR>
 
+" <Leader>v = Paste
+map <Leader>v "+gP
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+" <Leader>c = Copy
+map <Leader>c "+y
+
+" Dont open man entry
+noremap K <nop>
+
+" Don't open the quit window
+map q: :q
+
 """ Saving and exiting
 nnoremap <leader>s :w<CR>
 nnoremap <leader>S :wq<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 
+" <Leader>q Closes the current buffer
+nnoremap <silent> <Leader>q :Bclose<CR>
+
 """ Remove highlights
 nnoremap <leader>c :nohl<CR>
+
+nnoremap <F5> :GundoToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 
 " airline
 if !exists("g:airline_symbols")
@@ -228,3 +260,20 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)"
+
+" region expand
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" Make ctrlP use git 
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif

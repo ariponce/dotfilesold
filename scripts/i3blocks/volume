@@ -1,0 +1,9 @@
+#!/bin/bash
+
+VOL=$(ponymix get-volume)
+
+if $(ponymix is-muted); then
+    echo "<span color='#CC6666'> $VOL</span>"
+else
+    echo  $VOL
+fi

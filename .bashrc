@@ -9,7 +9,7 @@
 PS1='\[\e[1;37m\][\u@\h\[\e[1;36m\] \w]\$ \[\033[0m\]'
 
 # Dircolors
-eval `dircolors ~/colors/dircolors-solarized-master/dircolors.ansi-dark`
+#eval `dircolors ~/colors/dircolors-solarized-master/dircolors.ansi-dark`
 
 # don't put duplicate lines in the history. See bash(1) for more options
 HISTCONTROL=ignoredups
@@ -52,3 +52,14 @@ export QT_GRAPHICSSYSTEM=native
 if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
   . ~/.bash-git-prompt/gitprompt.sh
 fi
+
+if [ -f /usr/share/autojump/autojump.bash ]; then
+  . /usr/share/autojump/autojump.bash
+fi
+
+# Start gnome keyring
+eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+eval "$(thefuck --alias)"
+# You can use whatever you want as an alias, like for Mondays:
+eval "$(thefuck --alias FUCK)"

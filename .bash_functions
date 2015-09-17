@@ -120,3 +120,28 @@ function logview() {
 function topcommands() {
     history | awk '{print $2}' | awk 'BEGIN {FS="|"}{print $1}' | sort | uniq -c | sort -nr | head
 }
+
+
+testingenv() {
+    if [ -f .env ] && [ -f .env.testing ]; then
+        mv .env .env.local
+        mv .env.testing .env
+     else
+         echo "No .env or .env.testing file"
+         die 1
+     fi
+}
+
+localenv() {
+    if [ -f .env ] && [ -f .env.local ]; then
+        mv .env .env.testing
+        mv .env.local .env
+    else
+        echo "No .env or .env.local file"
+        die 1
+    fi
+}
+
+wtf() {
+    man $2
+}

@@ -32,7 +32,6 @@ Bundle "jiangmiao/auto-pairs"
 Bundle "airblade/vim-gitgutter"
 Bundle "scrooloose/nerdtree"
 Bundle "vits/ZoomWin"
-Bundle 'arnaud-lb/vim-php-namespace'
 Bundle "unblevable/quick-scope"
 "Bundle "Valloric/YouCompleteMe"
 Bundle "powerline/powerline"
@@ -45,6 +44,9 @@ Bundle "junegunn/vim-easy-align"
 Bundle "tpope/vim-repeat"
 Bundle "Shougo/neocomplete.vim"
 Bundle "terryma/vim-expand-region"
+Bundle "gilgigilgil/anderson.vim"
+Bundle "xolox/vim-misc"
+Bundle "xolox/vim-session"
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
@@ -74,11 +76,15 @@ set noignorecase
 set vb
 set nowrap
 set ruler
+set hid
 " Show the current mode
 set showmode
 set autoread
 " Enable search highlighting
 set hlsearch
+set undofile
+set undodir=~/.vimundo/
+
 
 set pastetoggle=<F2>
 
@@ -129,16 +135,14 @@ map <leader>p :bp<CR>
 map <leader>d :bd<CR>
 
 " <Leader>v = Paste
-map <Leader>v "+gP
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+"map <Leader>v "+gP
+"vmap <Leader>y "+y
+"vmap <Leader>d "+d
+"nmap <Leader>P "+P
+"vmap <Leader>P "+P
 
 " <Leader>c = Copy
-map <Leader>c "+y
+"map <Leader>c "+y
 
 " Dont open man entry
 noremap K <nop>
@@ -180,9 +184,6 @@ set laststatus=2
 " fix bufexplorer bug with hidden
 let g:bufExplorerFindActive=0
 
-" php-namespace
-inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
-noremap <Leader>u :call PhpInsertUse()<CR>
 
 "-----------------------------------------------------------------------------
 " NERD Tree Plugin Settings

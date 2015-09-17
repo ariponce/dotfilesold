@@ -16,9 +16,10 @@ set $WS1 1.
 set $WS2 2.
 set $WS3 3.
 set $WS4 4.
-set $WS5 5.
+set $WS5 5.
 set $WS6 6.
 set $WS7 7.
+set $WS8 8.
 
 # Disable focus follows mouse
 focus_follows_mouse no
@@ -49,6 +50,9 @@ bindsym $mod+i exec firefox
 
 # start chromium
 bindsym $mod+c exec chromium
+
+# start liri
+bindsym $mod+u exec ~/scripts/liri-browser
 
 # start phpstorm
 bindsym $mod+p exec phpstorm.sh 
@@ -127,14 +131,14 @@ bindsym XF86AudioPrev exec mpc prev
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+ampersand workspace 1. 
-bindsym $mod+eacute workspace 2.
-bindsym $mod+quotedbl workspace 3.
-bindsym $mod+apostrophe workspace 4.
-bindsym $mod+parenleft workspace 5.
-bindsym $mod+minus workspace 6.
-bindsym $mod+egrave workspace 7.
-bindsym $mod+underscore workspace 8
+bindsym $mod+ampersand workspace $WS1
+bindsym $mod+eacute workspace $WS2
+bindsym $mod+quotedbl workspace $WS3
+bindsym $mod+apostrophe workspace $WS4
+bindsym $mod+parenleft workspace $WS5
+bindsym $mod+minus workspace $WS6
+bindsym $mod+egrave workspace $WS7
+bindsym $mod+underscore workspace $WS8
 bindsym $mod+ccedilla workspace 9
 bindsym $mod+agrave workspace 10
 
@@ -165,6 +169,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+g exec ~/scripts/layout-1
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -205,7 +211,7 @@ bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
 for_window [class="^.*"] border pixel 0
 
 # Gaps
-gaps inner 10
+gaps inner 20
 gaps outer 0 
 
 workspace $WS2 gaps inner 0
@@ -213,10 +219,8 @@ workspace $WS2 gaps outer 0
 
 smart_gaps on
 
-
 # Dual-monitor setup
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
-#exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/blue.jpg
 exec --no-startup-id hsetroot -solid "#A54242"
 
 # Startup programs
@@ -225,14 +229,17 @@ exec --no-startup-id compton -cb --config ~/.config/compton.conf
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id mpd && mpdscribble 
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
-# Map capslock to esc
-exec --no-startup-id setxkbmap -option caps:escape
+exec --no-startup-id setxkbmap -option caps:escape # Map capslock to esc
+exec --no-startup-id unclutter # Hide mouse pointer 
 
+# Lock screen
+bindsym $mod+b exec "~/scripts/lock"
+exec xautolock -time 5 -locker '~/scripts/lock.' &
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font pango:DejaVu Sans Mono Bold 8
+    font pango:Hack Bold 8 
     colors {
         background #151718
         statusline #b3b9bd

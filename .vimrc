@@ -10,6 +10,7 @@ filetype off
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+set rtp+=~/.fzf
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -47,6 +48,7 @@ Bundle "terryma/vim-expand-region"
 Bundle "gilgigilgil/anderson.vim"
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-session"
+Bundle "godlygeek/tabular"
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
@@ -77,6 +79,7 @@ set vb
 set nowrap
 set ruler
 set hid
+set cul "highlights current line
 " Show the current mode
 set showmode
 set autoread

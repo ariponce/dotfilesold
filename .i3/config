@@ -204,6 +204,43 @@ mode "system: [p]oweroff [r]eboot" {
     bindsym Escape mode "default"
 }
 
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
 bindsym $mod+r mode "resize"
 bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
 
@@ -221,7 +258,11 @@ smart_gaps on
 
 # Dual-monitor setup
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
-exec --no-startup-id hsetroot -solid "#A54242"
+
+# Red background
+#exec --no-startup-id hsetroot -solid "#A54242"
+# Dark background
+exec --no-startup-id hsetroot -solid "#17191A"
 
 # Startup programs
 exec --no-startup-id "nm-applet"
@@ -241,12 +282,13 @@ exec xautolock -time 5 -locker '~/scripts/lock.' &
 bar {
     font pango:Hack Bold 8 
     colors {
-        background #151718
+        #background #151718
+        background #343537
         statusline #b3b9bd
         separator #666666
-        focused_workspace #353a3c #CC6666 #FFFFFF
-        inactive_workspace #2D3133 #393E41 #FFFFFF
-        active_workspace #282A2E #A54242 #FFFFFF
+        focused_workspace #353a3c #B5BD68 #FFFFFF
+        inactive_workspace #1D1F21 #393E41 #FFFFFF
+        active_workspace #282A2E #8C9440 #FFFFFF
     }   
     position top
     status_command i3blocks

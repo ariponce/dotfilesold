@@ -1,4 +1,4 @@
-"  "" PACKAGES
+  "" PACKAGES
 
 " no vi compatibility
 set nocompatible
@@ -15,7 +15,7 @@ set rtp+=~/.fzf
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Bundle 'gmarik/Vundle.vim'
 
 Bundle "flazz/vim-colorschemes"
 Bundle "kien/ctrlp.vim"
@@ -32,9 +32,9 @@ Bundle "henrik/vim-indexed-search"
 Bundle "jiangmiao/auto-pairs"
 Bundle "airblade/vim-gitgutter"
 Bundle "scrooloose/nerdtree"
+Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle "vits/ZoomWin"
 Bundle "unblevable/quick-scope"
-"Bundle "Valloric/YouCompleteMe"
 Bundle "powerline/powerline"
 Bundle "easymotion/vim-easymotion"
 Bundle "scrooloose/nerdcommenter"
@@ -49,6 +49,9 @@ Bundle "gilgigilgil/anderson.vim"
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-session"
 Bundle "godlygeek/tabular"
+Bundle "chase/vim-ansible-yaml"
+Plugin 'ryanoasis/vim-devicons'
+Bundle 'matze/vim-move'
 
 """ LANGUAGES
 Bundle "vim-php/vim-php-refactoring"
@@ -74,6 +77,7 @@ set expandtab
 set autoindent
 set smartindent
 set number
+set relativenumber
 set noignorecase
 set vb
 set nowrap
@@ -87,7 +91,7 @@ set autoread
 set hlsearch
 set undofile
 set undodir=~/.vimundo/
-
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 
 set pastetoggle=<F2>
 
@@ -106,12 +110,11 @@ set undodir=~/.vim/undo_files//
 syntax on
 set background=dark
 let g:hybrid_use_Xresources=1
-colorscheme hybrid
+colorscheme gruvbox
 
 " Make sure that unsaved buffers that are to be put in the background are 
 " allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
-" set <leader>
 
 " ctrlP config
 let g:ctrlp_map = "<c-p>"
@@ -120,7 +123,9 @@ nnoremap <leader>bp :CtrlPBuffer<CR>
 nnoremap <leader>g :CtrlPTag<cr>
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_max_files=0 
-let g:ctrlp_working_path_mode = ''
+let g:ctrlp_max_depth=40 
+let g:ctrlp_working_path_mode = 0
+set wildignore+=*/vendor/**
 
 """ Move between splits
 nnoremap <C-J> <C-W><C-J>
@@ -160,7 +165,7 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 
 " <Leader>q Closes the current buffer
-nnoremap <silent> <Leader>q :Bclose<CR>
+nnoremap <silent> <Leader>q :bd<CR>
 
 """ Remove highlights
 nnoremap <leader>c :nohl<CR>
@@ -269,15 +274,44 @@ nmap ga <Plug>(EasyAlign)"
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-" Make ctrlP use git 
-let g:ctrlp_use_caching = 0
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
+" NerdTree git
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ 
+    \}
 
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
-endif
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+
+let g:move_key_modifier = 'C'

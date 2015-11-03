@@ -11,7 +11,7 @@
 
 set $mod Mod4
 
-# worspaces
+# workspaces
 set $WS1 1.
 set $WS2 2.
 set $WS3 3.
@@ -20,6 +20,7 @@ set $WS5 5.
 set $WS6 6.
 set $WS7 7.
 set $WS8 8.
+set $WS9 9.
 
 # Disable focus follows mouse
 focus_follows_mouse no
@@ -43,7 +44,7 @@ font pango: DejaVu Sans Mono Book, FontAwesome 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator --profile=Gruvbox
 
 # start firefox
 bindsym $mod+i exec firefox
@@ -68,7 +69,8 @@ bindsym $mod+Shift+Q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -h 35 -nb '#343537' -nf '#DEDFCD' -sb '#B5BD68' -i -dim 0.4"
 
 # change focus
 bindsym $mod+j focus left
@@ -139,7 +141,7 @@ bindsym $mod+parenleft workspace $WS5
 bindsym $mod+minus workspace $WS6
 bindsym $mod+egrave workspace $WS7
 bindsym $mod+underscore workspace $WS8
-bindsym $mod+ccedilla workspace 9
+bindsym $mod+ccedilla workspace $WS9
 bindsym $mod+agrave workspace 10
 
 # move focused container to workspace
@@ -244,17 +246,25 @@ mode "$mode_gaps_outer" {
 bindsym $mod+r mode "resize"
 bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
 
-# Disable borders
-for_window [class="^.*"] border pixel 0
 
 # Gaps
-gaps inner 20
+gaps inner 0 
 gaps outer 0 
 
-workspace $WS2 gaps inner 0
-workspace $WS2 gaps outer 0
-
 smart_gaps on
+smart_borders on
+
+new_window pixel 3
+for_window [class="Terminator"] border pixel 2 
+
+# class                 border  backgr. text    indicator
+client.focused          #928374 #928374 #ffffff #2e9ef4
+client.focused_inactive #282828 #282828 #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000
+
+client.background       #ffffff
 
 # Dual-monitor setup
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
@@ -262,10 +272,13 @@ exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
 # Red background
 #exec --no-startup-id hsetroot -solid "#A54242"
 # Dark background
-exec --no-startup-id hsetroot -solid "#17191A"
+#exec --no-startup-id hsetroot -solid "#17191A"
+# Image bg
+#exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/qexocp.png
+exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/IrFMpUu.jpg
 
 # Startup programs
-exec --no-startup-id "nm-applet"
+#exec --no-startup-id "nm-applet"
 exec --no-startup-id compton -cb --config ~/.config/compton.conf
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id mpd && mpdscribble 
@@ -275,20 +288,21 @@ exec --no-startup-id unclutter # Hide mouse pointer
 
 # Lock screen
 bindsym $mod+b exec "~/scripts/lock"
-exec xautolock -time 5 -locker '~/scripts/lock.' &
+exec --no-startup-id xautolock -time 5 -locker '~/scripts/lock.' &
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    height 35
     font pango:Hack Bold 8 
     colors {
         #background #151718
         background #343537
         statusline #b3b9bd
-        separator #666666
-        focused_workspace #353a3c #B5BD68 #FFFFFF
-        inactive_workspace #1D1F21 #393E41 #FFFFFF
-        active_workspace #282A2E #8C9440 #FFFFFF
+        separator #444444
+        focused_workspace #83A598 #83A598 #DEDFCD
+        inactive_workspace #454648 #454648 #DEDFCD
+        active_workspace #458588 #458588 #DEDFCD
     }   
     position top
     status_command i3blocks

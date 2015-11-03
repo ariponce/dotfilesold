@@ -1,107 +1,258 @@
 [global_config]
+  borderless = True
   enabled_plugins = ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  title_transmit_bg_color = "#004658"
-  title_inactive_fg_color = "#ededed"
-  title_inactive_bg_color = "#001d25"
+  geometry_hinting = False
+  handle_size = 1
+  title_hide_sizetext = True
+  title_inactive_bg_color = "#25272a"
+  title_inactive_fg_color = "#ffffff"
+  title_transmit_bg_color = "#151718"
 [keybindings]
-[profiles]
-  [[default]]
-    scrollbar_position = hidden
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    background_image = None
-    audible_bell = True
-    use_system_font = False
-    cursor_color = "#f5f5f5"
-    foreground_color = "#839496"
-    font = DejaVu Sans Mono 12
-    background_color = "#002b36"
-  [[alternate]]
-    scrollbar_position = hidden
-    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
-    font = DejaVu Sans Mono 11
-    background_image = None
-    scrollback_lines = 4096
-    use_system_font = False
-    foreground_color = "#ffffff"
-    scroll_on_output = False
-    icon_bell = False
-    copy_on_selection = True
-    background_color = "#2d2d2d"
-  [[gase]]
-    scrollbar_position = hidden
-    palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
-    background_image = None
-    use_system_font = False
-    cursor_color = "#c5c8c6"
-    foreground_color = "#dedfcd"
-    font = Inconsolata Medium 12
-    background_color = "#1d1f21"
-  [[fuck]]
-    scrollbar_position = hidden
-    palette = "#282a2e:#373b41:#a54242:#cc6666:#8c9440:#b5bd68:#de935f:#f0c674:#5f819d:#81a2be:#85678f:#b294bb:#5e8d87:#8abeb7:#707880:#c5c8c6"
-    background_image = None
-    use_system_font = False
-    cursor_color = "#c5c8c6"
-    foreground_color = "#dedfcd"
-    font = Inconsolata Medium 11
-    background_color = "#1d1f21"
-  [[New Profile]]
-    background_image = None
-  [[Base16 Ocean Dark]]
-    scrollbar_position = hidden
-    palette = "#2b303b:#bf616a:#a3be8c:#ebcb8b:#8fa1b3:#b48ead:#96b5b4:#c0c5ce:#65737e:#bf616a:#a3be8c:#ebcb8b:#8fa1b3:#b48ead:#96b5b4:#eff1f5"
-    font = DejaVu Sans Mono 11
-    background_image = None
-    use_system_font = False
-    cursor_color = "#c0c5ce"
-    foreground_color = "#c0c5ce"
-    scroll_on_output = False
-    copy_on_selection = True
-    background_color = "#2b303b"
-    allow_bold = False
-    scrollback_infinite = True
+  group_all = <Primary><Shift><Alt>g
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
       profile = default
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
-  [[Tri]]
-    [[[child0]]]
-      position = 1920:0
       type = Window
+  [[Multi]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 88f02d0d-232f-441b-a004-900df7eb4f38
+      last_active_window = True
+      maximised = False
       order = 0
       parent = ""
-      size = 1920, 1057
+      position = 20:39
+      size = 930, 1021
+      title = ariel@ariel-optiplex:~
+      type = Window
     [[[child1]]]
-      position = 960
-      type = HPaned
       order = 0
       parent = child0
+      position = 464
+      ratio = 0.499462365591
+      type = HPaned
+    [[[child10]]]
+      order = 0
+      parent = child9
+      position = 232
+      ratio = 0.5
+      type = HPaned
+    [[[child13]]]
+      order = 1
+      parent = child9
+      position = 232
+      ratio = 0.5
+      type = HPaned
     [[[child2]]]
+      order = 0
+      parent = child1
+      position = 510
+      ratio = 0.5
+      type = VPaned
+    [[[child3]]]
+      order = 0
+      parent = child2
+      position = 232
+      ratio = 0.501077586207
+      type = HPaned
+    [[[child6]]]
+      order = 1
+      parent = child2
+      position = 232
+      ratio = 0.501077586207
+      type = HPaned
+    [[[child9]]]
+      order = 1
+      parent = child1
+      position = 510
+      ratio = 0.5
+      type = VPaned
+    [[[terminal11]]]
+      group = All
+      order = 0
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = 0421af0c-394a-4580-aa1a-d2cecf39c4a0
+    [[[terminal12]]]
+      group = All
+      order = 1
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = b2a95fbc-0983-4d2e-b8ed-0420eefe9f63
+    [[[terminal14]]]
+      group = All
+      order = 0
+      parent = child13
+      profile = default
+      type = Terminal
+      uuid = 88f02d0d-232f-441b-a004-900df7eb4f38
+    [[[terminal15]]]
+      group = All
+      order = 1
+      parent = child13
+      profile = default
+      type = Terminal
+      uuid = 6d569ff2-9304-4bea-af79-3b76deb8ca45
+    [[[terminal4]]]
+      group = All
+      order = 0
+      parent = child3
+      profile = default
+      type = Terminal
+      uuid = 9a16efbb-4307-4a44-b5e7-9d96077575f0
+    [[[terminal5]]]
+      group = All
+      order = 1
+      parent = child3
+      profile = default
+      type = Terminal
+      uuid = 9e8c49b6-9683-40d1-825a-c02c52ee5bea
+    [[[terminal7]]]
+      group = All
+      order = 0
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = 21ad2ddf-881e-45d4-951e-00d8f69b255b
+    [[[terminal8]]]
+      group = All
+      order = 1
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = 6e585e82-983c-471c-9b18-98ac504c5de3
+  [[Tri]]
+    [[[child0]]]
+      order = 0
+      parent = ""
+      position = 1920:0
+      size = 1920, 1057
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 960
+      type = HPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
       position = 528
       type = VPaned
-      order = 0
-      parent = child1
     [[[terminal3]]]
-      profile = gase
-      type = Terminal
+      command = htop
       order = 0
       parent = child2
-      command = htop
-    [[[terminal5]]]
       profile = gase
       type = Terminal
-      order = 1
-      parent = child1
-      command = ""
     [[[terminal4]]]
-      profile = gase
-      type = Terminal
+      command = ""
       order = 1
       parent = child2
+      profile = gase
+      type = Terminal
+    [[[terminal5]]]
       command = ""
+      order = 1
+      parent = child1
+      profile = gase
+      type = Terminal
 [plugins]
+[profiles]
+  [[default]]
+    background_color = "#1d1f21"
+    background_darkness = 0.89
+    background_image = None
+    cursor_color = "#ffffff"
+    font = Hack 10
+    foreground_color = "#dedfcd"
+    icon_bell = False
+    palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
+  [[Base16 Ocean Dark]]
+    allow_bold = False
+    background_color = "#2b303b"
+    background_image = None
+    copy_on_selection = True
+    cursor_color = "#c0c5ce"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#c0c5ce"
+    palette = "#2b303b:#bf616a:#a3be8c:#ebcb8b:#8fa1b3:#b48ead:#96b5b4:#c0c5ce:#65737e:#bf616a:#a3be8c:#ebcb8b:#8fa1b3:#b48ead:#96b5b4:#eff1f5"
+    scroll_on_output = False
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    use_system_font = False
+  [[Gruvbox]]
+    background_color = "#282828"
+    background_image = None
+    cursor_color = "#666666"
+    foreground_color = "#ebdbb2"
+    icon_bell = False
+    palette = "#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#689d6a:#ebdbb2:#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984"
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
+  [[New Profile]]
+    background_image = None
+  [[Pap]]
+    background_color = "#252526"
+    background_image = None
+    cursor_color = "#d3d9e3"
+    font = Hack 10
+    foreground_color = "#d3d9e3"
+    palette = "#252526:#e66e63:#a3be8c:#e7ca91:#86a6c7:#a08eb4:#96aab5:#c0c5ce:#65737e:#e66e63:#a3be8c:#e7ca91:#86a6c7:#a08eb4:#96aab5:#eff1f5"
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
+  [[Satori]]
+    background_color = "#09090d"
+    background_image = None
+    cursor_color = "#839496"
+    font = Roboto Mono 10
+    foreground_color = "#839496"
+    palette = "#353540:#8c5760:#7b8c58:#8c6e43:#58698c:#7b5e7d:#06989a:#8c8b8b:#545466:#b26f7a:#9db270:#b28c55:#7086b2:#9c77b2:#34e2e2:#b8b8c8"
+    use_system_font = False
+  [[Simplicity]]
+    background_color = "#1f1f22"
+    background_image = None
+    cursor_color = "#f3f3f3"
+    foreground_color = "#f3f3f3"
+    palette = "#333333:#bf5c56:#97b19c:#d7bd8a:#545f72:#dd949a:#be926b:#f4f4f2:#333333:#bf5c56:#97b19c:#d7bd8a:#545f72:#dd949a:#be926b:#f4f4f2"
+  [[alternate]]
+    background_color = "#2d2d2d"
+    background_image = None
+    copy_on_selection = True
+    font = DejaVu Sans Mono 11
+    foreground_color = "#ffffff"
+    icon_bell = False
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    scroll_on_output = False
+    scrollback_lines = 4096
+    scrollbar_position = hidden
+    use_system_font = False
+  [[fuck]]
+    background_color = "#1d1f21"
+    background_image = None
+    cursor_color = "#c5c8c6"
+    font = Inconsolata Medium 11
+    foreground_color = "#dedfcd"
+    palette = "#282a2e:#373b41:#a54242:#cc6666:#8c9440:#b5bd68:#de935f:#f0c674:#5f819d:#81a2be:#85678f:#b294bb:#5e8d87:#8abeb7:#707880:#c5c8c6"
+    scrollbar_position = hidden
+    use_system_font = False
+  [[gase]]
+    background_color = "#1d1f21"
+    background_image = None
+    cursor_color = "#c5c8c6"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#dedfcd"
+    palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
+    scrollbar_position = hidden
+    use_system_font = False

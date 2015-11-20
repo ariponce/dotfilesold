@@ -145,3 +145,57 @@ localenv() {
 wtf() {
     man $2
 }
+
+## WIKIPEDIA SEARCH FUNCTION ##
+wikipediaSearch() {
+	echo -n -e "\n============================================\n\tWelcome to WikiPedia Search"; echo ""; i=1 ; for line in $(lynx --dump "http://en.wikipedia.org/w/index.php?title=Special%3ASearch&profile=default&search=$1&fulltext=Search" | grep http://en.wikipedia.org/wiki | cut -c7-); do echo $i $line; lines[$i]=$line ;  i=$(($i+1)); done ; echo -n -e "\n============================================\n\tPlease select the link to open - "; read answer; w3m ${lines[$answer]}
+}
+
+## ARCHWIKI SEARCH FUNCTION ##
+archSearch() {
+	echo -n -e "\n============================================\n\tWelcome to Arch Wiki Search"; echo ""; i=1 ; for line in $(lynx --dump "https://wiki.archlinux.org/index.php?title=Special%3ASearch&profile=default&search=$1" | grep https://wiki.archlinux.org/ | cut -c7-); do echo $i $line; lines[$i]=$line ; i=$(($i+1)); done ; echo -n -e "\n============================================\n\tPlease select the link to open - "; read answer; w3m ${lines[$answer]}
+}
+
+#cd to dir of defined file | Usage: cdf <file>
+cdf () { 
+  cd "$(dirname "$(locate -i "$*" | head -n 1)")" ; 
+}
+
+#web search tool | Usage: gsearch <value>
+	function gsearch { 
+	Q="$@"; 
+	GOOG_URL='https://www.google.co.uk/search?tbs=li:1&q='; 
+	AGENT="Mozilla/4.0"; 
+	stream=$(curl -A "$AGENT" -skLm 20 "${GOOG_URL}${Q//\ /+}" | grep -oP '\/url\?q=.+?&amp' | sed 's|/url?q=||; s|&amp||'); 
+	echo -e "${stream//\%/\x}";
+}
+
+#Is server up ? | Usage: down4me <www.foo.com>
+down4me() { 
+	curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';
+}
+
+#internetinfo | Usage: ii
+function ii()   # get current host related info
+{
+    echo -e "\n${RED}Kernel Information:$NC " ; uname -a
+    echo -e "\n${RED}Users logged on:$NC " ; w -h
+    echo -e "\n${RED}Current date :$NC " ; date
+    echo -e "\n${RED}Machine stats :$NC " ; uptime
+    echo -e "\n${RED}Memory stats :$NC " ; free
+    echo -e "\n${RED}Disk Usage :$NC " ; df -Th
+    echo -e "\n${RED}LAN Information :$NC" ; netinfoLAN
+    echo
+}
+
+#netinfo - shows LAN network information for your system (part of ii)
+function netinfoLAN (){
+	echo "---------------------------------------------------"
+	/sbin/ifconfig enp3s0 | awk /'inet/ {print $2}'
+	echo "---------------------------------------------------"
+}
+
+#Search files & directories | Usage: search <file/dirs>
+search() { 
+	find . -iname "*$@*" | less; 
+}

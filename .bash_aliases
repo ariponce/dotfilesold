@@ -1,4 +1,4 @@
-alias ls='ls --color=auto'
+alias ls='ls --group-directories-first --color=auto'
 alias rm='rm -i'
 alias ll='ls -la'
 alias grep='grep --color=auto'
@@ -12,7 +12,7 @@ alias rvm='vagrant reload --provision'
 alias nginxstart='sudo systemctl start nginx'
 alias nginxreload='sudo systemctl restart nginx'
 alias phpreload='sudo systemctl restart php-fpm'
-alias db='mysql -uariel -p'
+alias db='mysql -uroot -p'
 alias prod='ssh nicolas@54.195.250.27'
 alias pls='sudo $(history -p !!)'
 alias httprst='sudo systemctl restart httpd'
@@ -24,4 +24,6 @@ alias satis-update="php /home/ariel/Sites/Plugins/bin/satis build /home/ariel/Si
 alias shrug="echo '¯\_(ツ)_/¯'"
 alias vhosts="sudo vim /etc/httpd/conf/extra/httpd-vhosts.conf"
 alias futonprod="ssh -f -L localhost:15984:127.0.0.1:5984 nicolas@54.195.250.27 -N"
+alias futonlocalserver="ssh -p 2222 -f -L localhost:25984:127.0.0.1:5984 mce@128.140.138.100 -N"
 alias bye="exit"
+alias pingg="ping -c 3 8.8.8.8"

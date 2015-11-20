@@ -48,6 +48,7 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'gilgigilgil/anderson.vim'
 Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-session'
 Plugin 'godlygeek/tabular'
 Plugin 'ryanoasis/vim-devicons'
@@ -106,6 +107,7 @@ set showmatch " show matching braces
 set mat=2 " how many tenths of a second to blink
 set magic " magic for regex
 set ttyfast " faster redrawing
+set cursorline
 
 " Save swp, backups and undos to custom folders
 set backupdir=~/.vim/backup_files//
@@ -118,14 +120,15 @@ set pastetoggle=<F2>
 
 " folding
 set foldmethod=syntax " fold based on indent
-set foldnestmax=10 " deepest fold is 10 levels
-set nofoldenable " don't fold by default
-set foldlevel=1
+set foldnestmax=2 " deepest fold is 10 levels
+set foldenable " don't fold by default
+set foldlevel=2
 
 " colors
-syntax on
+syntax enable
+let g:hybrid_use_Xresources = 1
 set background=dark
-colorscheme gruvbox
+colorscheme hybrid_material
 
 " Make sure that unsaved buffers that are to be put in the background are
 " allowed to go in there (ie. the "must save first" error doesn't come up)
@@ -238,10 +241,10 @@ nnoremap <leader>vr :so ~/.vimrc<CR>
 nnoremap <leader>c :nohl<CR>
 
 " Open Gundo
-nnoremap <F5> :GundoToggler<CR>
+nnoremap <F5> :GundoToggle<CR>
 
 " Open Tagbar
-nmap <F8> :TagbarToggle
+nmap <F8> :TagbarToggle<CR>
 
 " scroll the viewport faster
 nnoremap <C-e> 3<C-e>
@@ -258,6 +261,8 @@ noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
+
+set diffopt+=vertical
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -285,7 +290,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
                    \ '\.ilk$', '^BuildLog.htm$', '\.pdb$', '\.idb$',
                    \ '\.embed\.manifest$', '\.embed\.manifest.res$',
-                   \ '\.intermediate\.manifest$', '^mt.dep$' ]
+                   \ '\.intermediate\.manifest$', '^mt.dep$', '^.git$', '^.idea$' ]
 
 
 let g:SuperTabDefaultCompletionType = ""

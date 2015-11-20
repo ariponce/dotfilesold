@@ -44,7 +44,8 @@ font pango: DejaVu Sans Mono Book, FontAwesome 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator --profile=Gruvbox
+#bindsym $mod+Return exec terminator --profile=Gruvbox
+bindsym $mod+Return exec termite
 
 # start firefox
 bindsym $mod+i exec firefox
@@ -56,7 +57,7 @@ bindsym $mod+c exec chromium
 bindsym $mod+u exec ~/scripts/liri-browser
 
 # start phpstorm
-bindsym $mod+p exec phpstorm.sh 
+bindsym $mod+p exec phpstorm.sh
 
 # start nautilus
 bindsym $mod+n exec nautilus
@@ -248,23 +249,23 @@ bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
 
 
 # Gaps
-gaps inner 0 
-gaps outer 0 
+gaps inner 15
+gaps outer 0
 
 smart_gaps on
 smart_borders on
 
-new_window pixel 3
-for_window [class="Terminator"] border pixel 2 
+#new_window pixel 0
+for_window [class="^.*"] border pixel 0
+#for_window [class="Terminator"] border pixel 1
 
 # class                 border  backgr. text    indicator
-client.focused          #928374 #928374 #ffffff #2e9ef4
-client.focused_inactive #282828 #282828 #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000
-
-client.background       #ffffff
+#client.focused          #928374 #928374 #ffffff #2e9ef4
+#client.focused_inactive #282828 #282828 #ffffff #484e50
+#client.unfocused        #263238 #263238 #888888 #292d2e
+#client.urgent           #2f343a #900000 #ffffff #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000
+#client.background       #ffffff
 
 # Dual-monitor setup
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
@@ -274,17 +275,16 @@ exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
 # Dark background
 #exec --no-startup-id hsetroot -solid "#17191A"
 # Image bg
-#exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/qexocp.png
 exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/IrFMpUu.jpg
 
 # Startup programs
 #exec --no-startup-id "nm-applet"
 exec --no-startup-id compton -cb --config ~/.config/compton.conf
 exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id mpd && mpdscribble 
+exec --no-startup-id mpd && mpdscribble
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 exec --no-startup-id setxkbmap -option caps:escape # Map capslock to esc
-exec --no-startup-id unclutter # Hide mouse pointer 
+exec --no-startup-id unclutter # Hide mouse pointer
 
 # Lock screen
 bindsym $mod+b exec "~/scripts/lock"
@@ -294,16 +294,15 @@ exec --no-startup-id xautolock -time 5 -locker '~/scripts/lock.' &
 # finds out, if available)
 bar {
     height 35
-    font pango:Hack Bold 8 
+    font pango:Hack Bold 8
     colors {
-        #background #151718
-        background #343537
+        background #263238
         statusline #b3b9bd
         separator #444444
-        focused_workspace #83A598 #83A598 #DEDFCD
+        focused_workspace #B5BD68 #B5BD68 #DEDFCD
         inactive_workspace #454648 #454648 #DEDFCD
         active_workspace #458588 #458588 #DEDFCD
-    }   
+    }
     position top
     status_command i3blocks
-} 
+}

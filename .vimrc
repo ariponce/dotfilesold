@@ -17,7 +17,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 
 " main plugins
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/grep.vim'
@@ -49,15 +49,18 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'gilgigilgil/anderson.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
-Plugin 'xolox/vim-session'
 Plugin 'godlygeek/tabular'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'matze/vim-move'
+Plugin 'tobyS/vmustache'
+Plugin 'tpope/vim-obsession'
+Plugin 'dhruvasagar/vim-prosession'
 
 """ LANGUAGES
 Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-php/vim-php-refactoring'
-Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'adoy/vim-php-refactoring-toolbox'
+"Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'tobyS/pdv'
 Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
 Plugin 'chase/vim-ansible-yaml'
@@ -108,6 +111,7 @@ set mat=2 " how many tenths of a second to blink
 set magic " magic for regex
 set ttyfast " faster redrawing
 set cursorline
+set mouse=a
 
 " Save swp, backups and undos to custom folders
 set backupdir=~/.vim/backup_files//
@@ -134,7 +138,7 @@ colorscheme hybrid_material
 " allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
 
-set tags=~/.vim/tags/mce,~/.vim/tags/lumen,tags
+set tags=~/.vim/tags/mce,~/.vim/tags/lumen,tags,~/.vim/tags/master
 
 " file type specific settings
 if has('autocmd') && !exists('autocommands_loaded')
@@ -166,6 +170,9 @@ if has('autocmd') && !exists('autocommands_loaded')
     let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
 
     " autocmd! BufEnter * call ApplyLocalSettings(expand('<afile>:p:h'))
+
+	autocmd BufRead * FixWhitespace
+	autocmd BufWritePre * FixWhitespace
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -250,6 +257,10 @@ nmap <F8> :TagbarToggle<CR>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
+" Insert new line and stay on insert mode
+nmap oo o<Esc>k
+nmap OO O<Esc>j
+
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Git
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -296,8 +307,8 @@ let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
 let g:SuperTabDefaultCompletionType = ""
 
 """ auto-open NerdTree when no file is specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " NerdTree git
 let g:NERDTreeIndicatorMapCustom = {
@@ -356,6 +367,16 @@ let g:airline#extensions#tabline#enabled       =  1
 let g:airline#extensions#tabline#tab_nr_type   =  1 " tab number
 let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
 let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
+
+" Syntastic
+" =============================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " QuickScope
 " =============================================
@@ -432,10 +453,27 @@ let g:bufExplorerFindActive=0 " fix bufexplorer bug with hidden
 let g:neocomplete#enable_at_startup = 1
 let g:SuperTabDefaultCompletionType = ""
 
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
 " Vim-move
 " =============================================
 let g:move_key_modifier = 'C'
 
 " PHP refactor
 " =============================================
-let g:php_refactor_command='php /home/ariel/refactor.phar'
+let g:vim_php_refactoring_default_property_visibility = 'protected'
+let g:vim_php_refactoring_default_method_visibility = 'protected'
+let g:vim_php_refactoring_auto_validate_visibility = 0
+
+" Vim Session
+" ============================================
+let g:session_autoload = 'no'
+
+" Pdv
+" ============================================
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-c> :call pdv#DocumentWithSnip()<CR>

@@ -479,3 +479,28 @@ let g:session_autoload = 'no'
 " ============================================
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-c> :call pdv#DocumentWithSnip()<CR>
+
+" PHP Testing
+" ============================================
+
+function! PHPUnitTest()
+	let cwd = getcwd()
+	system("runtests", cwd)
+endfunction
+
+function! RunPHPUnitTest(filter)
+    if a:filter
+        normal! T yw
+        let result = system("phpunit --filter " . @" . " " . bufname("%"))
+    else
+        let result = system("phpunit " . bufname("%"))
+    endif
+    split __PHPUnit_Result__
+    normal! ggdG
+    setlocal buftype=nofile
+    call append(0, split(result, '\v\n'))
+endfunction
+
+nnoremap <leader>u :call RunPHPUnitTest(0)<cr>
+nnoremap <leader>f :call RunPHPUnitTest(1)<cr>
+

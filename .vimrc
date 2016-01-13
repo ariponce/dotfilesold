@@ -50,7 +50,7 @@ Plugin 'gilgigilgil/anderson.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'godlygeek/tabular'
-Plugin 'ryanoasis/vim-devicons'
+"Plugin 'ryanoasis/vim-devicons'
 Plugin 'matze/vim-move'
 Plugin 'tobyS/vmustache'
 Plugin 'tpope/vim-obsession'
@@ -59,6 +59,7 @@ Plugin 'dhruvasagar/vim-prosession'
 """ LANGUAGES
 Plugin 'sheerun/vim-polyglot'
 Plugin 'adoy/vim-php-refactoring-toolbox'
+Plugin 'arnaud-lb/vim-php-namespace'
 "Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'tobyS/pdv'
 Plugin 'fatih/vim-go'
@@ -85,12 +86,12 @@ set shiftwidth=4 " number of spaces to use for indent
 set softtabstop=4 " edit as if the tabs are 4 chars
 set noexpandtab " use tabs, no spaces
 
-set autoindent
-set smartindent
+set autoindent " automatically indent files
+set copyindent " copy last indent when autoindenting
 
 " show the current line number and relative numbers from there
 set number
-set relativenumber
+"set relativenumber
 
 set history=1000 " save up to 1000 histories
 
@@ -178,9 +179,9 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Copying
 """"""""""""""""""""""""""""""""""""""""""""""""
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+"if has('unnamedplus')
+  "set clipboard=unnamed,unnamedplus
+"endif
 
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
@@ -416,14 +417,14 @@ let g:qs_second_occurrence_highlight_color = 81
 " CtrlP
 " =============================================
 let g:ctrlp_map = "<c-p>"
-nnoremap <leader>t :CtrlPMRU<CR>
-nnoremap <leader>bp :CtrlPBuffer<CR>
+nnoremap <leader>bp :CtrlPMRU<CR>
+nnoremap <leader>t :CtrlPBuffer<CR>
 nnoremap <leader>g :CtrlPTag<cr>
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = 0
-set wildignore+=*/vendor/**
+"set wildignore+=*/vendor/**
 
 " UltiSnips
 " =============================================
@@ -450,6 +451,7 @@ let g:bufExplorerFindActive=0 " fix bufexplorer bug with hidden
 
 " Neocomplete
 " =============================================
+let g:acp_enableAtStartup = 1
 let g:neocomplete#enable_at_startup = 1
 let g:SuperTabDefaultCompletionType = ""
 
@@ -477,3 +479,28 @@ let g:session_autoload = 'no'
 " ============================================
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-c> :call pdv#DocumentWithSnip()<CR>
+
+" PHP Testing
+" ============================================
+
+function! PHPUnitTest()
+	let cwd = getcwd()
+	system("runtests", cwd)
+endfunction
+
+function! RunPHPUnitTest(filter)
+    if a:filter
+        normal! T yw
+        let result = system("phpunit --filter " . @" . " " . bufname("%"))
+    else
+        let result = system("phpunit " . bufname("%"))
+    endif
+    split __PHPUnit_Result__
+    normal! ggdG
+    setlocal buftype=nofile
+    call append(0, split(result, '\v\n'))
+endfunction
+
+nnoremap <leader>u :call RunPHPUnitTest(0)<cr>
+nnoremap <leader>f :call RunPHPUnitTest(1)<cr>
+

@@ -15,15 +15,19 @@ Plugin 'gmarik/Vundle.vim'
 
 " colorschemes
 Plugin 'flazz/vim-colorschemes'
+Plugin 'xolox/vim-colorscheme-switcher'
+Plugin '0ax1/lxvc'
 
 " main plugins
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'sjl/gundo.vim'
+"Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/CSApprox'
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'vim-scripts/tComment'
@@ -50,11 +54,13 @@ Plugin 'gilgigilgil/anderson.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'godlygeek/tabular'
-"Plugin 'ryanoasis/vim-devicons'
 Plugin 'matze/vim-move'
 Plugin 'tobyS/vmustache'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'Shougo/vimshell.vim'
+Plugin 'Shougo/vimproc'
 
 """ LANGUAGES
 Plugin 'sheerun/vim-polyglot'
@@ -65,11 +71,12 @@ Plugin 'tobyS/pdv'
 Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
 Plugin 'chase/vim-ansible-yaml'
+Plugin 'janko-m/vim-test'
+Plugin 'tpope/vim-dispatch'
 
 " All Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 filetype plugin on
 
 
@@ -133,7 +140,7 @@ set foldlevel=2
 syntax enable
 let g:hybrid_use_Xresources = 1
 set background=dark
-colorscheme hybrid_material
+colorscheme lxvc
 
 " Make sure that unsaved buffers that are to be put in the background are
 " allowed to go in there (ie. the "must save first" error doesn't come up)
@@ -236,10 +243,13 @@ noremap K <nop>
 noremap Q <nop>
 map q: :q
 
+" Close quickfix window
+nnoremap <leader>q :ccl<Cr>
+nnoremap <leader>z :cope<Cr>
+
 " Saving and exiting
 nnoremap <leader>s :w<CR>
 nnoremap <leader>S :wq<CR>
-nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 
 " Reload vimrc
@@ -249,10 +259,10 @@ nnoremap <leader>vr :so ~/.vimrc<CR>
 nnoremap <leader>c :nohl<CR>
 
 " Open Gundo
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F5> :UndotreeToggle<CR>
 
 " Open Tagbar
-nmap <F8> :TagbarToggle<CR>
+nmap <F6> :TagbarToggle<CR>
 
 " scroll the viewport faster
 nnoremap <C-e> 3<C-e>
@@ -261,6 +271,8 @@ nnoremap <C-y> 3<C-y>
 " Insert new line and stay on insert mode
 nmap oo o<Esc>k
 nmap OO O<Esc>j
+
+nnoremap <Enter> :
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Git
@@ -359,7 +371,7 @@ if !exists("g:airline_symbols")
   let g:airline_symbols = {}
 endif
 
-let g:airline_theme="hybrid"
+let g:airline_theme="raven"
 let g:airline_powerline_fonts=1
 let g:airline#extensions#branch#empty_message  =  "no .git"
 let g:airline#extensions#whitespace#enabled    =  0
@@ -424,7 +436,14 @@ let g:ctrlp_follow_symlinks=1
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = 0
-"set wildignore+=*/vendor/**
+"set wildignore+=*/vendor/**,*/.git/*,*/tests/*
+
+" Give CtrlP some speed!
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+"if executable('ag')
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  "let g:ctrlp_use_caching = 0
+"endif
 
 " UltiSnips
 " =============================================
@@ -479,3 +498,52 @@ let g:session_autoload = 'no'
 " ============================================
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-c> :call pdv#DocumentWithSnip()<CR>
+
+" ctrlp funky
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+" Vim shell
+" ===========================================
+nnoremap <leader>sh :VimShellPop<Cr>
+let g:vimshell_popup_command = 'belowright sp'
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_prompt = '% '
+
+" Vim test
+" ============================================
+nmap <silent> <leader>tt :TestNearest<CR>
+let test#strategy = "dispatch"
+
+" Functions
+" ============================================
+function! AddNamespace()
+	execute "norm ggA ocns\<Tab>"
+endfunction
+
+nnoremap <leader>ns :call AddNamespace()<CR>
+
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+"autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+"autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+
+
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+" Env vars
+"===========================================
+let $MCE = 'plugins/mce/'
+let $MUSER = 'plugins/mce/user'
+
